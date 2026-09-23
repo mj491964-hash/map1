@@ -1,0 +1,308 @@
+/* ==========================================================================
+   Leaflet Custom Map & Marker Styles
+   ========================================================================== */
+
+/* Dark Mode Leaflet Container Overrides */
+.leaflet-container {
+  background-color: #0b1120 !important;
+  font-family: inherit !important;
+}
+
+/* Custom Zoom Control Styling */
+.leaflet-top.leaflet-left {
+  top: 16px;
+  left: 16px;
+}
+
+.leaflet-bar {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+.leaflet-bar a {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(10px);
+  color: #f8fafc !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  transition: all 0.2s ease;
+}
+
+.leaflet-bar a:hover {
+  background-color: rgba(30, 41, 59, 0.95) !important;
+  color: #38bdf8 !important;
+}
+
+/* ==========================================================================
+   Category Custom Pins (SVG Markers)
+   ========================================================================== */
+.custom-pin-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.custom-pin-marker:hover {
+  transform: scale(1.25) translateY(-4px);
+  z-index: 9999 !important;
+}
+
+.pin-bubble {
+  width: 28px;
+  height: 28px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.pin-bubble-inner {
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.pin-bubble-inner svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Category Marker Colors */
+.pin-mart .pin-bubble {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+.pin-department .pin-bubble {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+.pin-gym .pin-bubble {
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+.pin-cvs .pin-bubble {
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* ==========================================================================
+   Density-Based Cluster Markers (핵심 요구사항: 밀집 상가 빨간색 표시)
+   ========================================================================== */
+.marker-cluster-custom {
+  background: transparent !important;
+  border: none !important;
+}
+
+.cluster-bubble {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: -0.02em;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease;
+  position: relative;
+}
+
+.cluster-bubble:hover {
+  transform: scale(1.15);
+}
+
+/* 🔴 High Density (50+ stores): Vivid Crimson Red + Outer Glow + Pulse Animation */
+.cluster-high .cluster-bubble {
+  background: radial-gradient(circle at 35% 35%, #f87171, #ef4444, #b91c1c);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.85), 0 0 35px rgba(220, 38, 38, 0.5);
+  animation: pulse-cluster-red 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  font-size: 0.95rem;
+  border-color: #ffffff;
+}
+
+@keyframes pulse-cluster-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8), 0 0 16px rgba(239, 68, 68, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(239, 68, 68, 0), 0 0 25px rgba(239, 68, 68, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0), 0 0 16px rgba(239, 68, 68, 0.6);
+  }
+}
+
+/* 🟠 Medium Density (20 ~ 49 stores): Warm Amber */
+.cluster-mid .cluster-bubble {
+  background: radial-gradient(circle at 35% 35%, #fbbf24, #f59e0b, #b45309);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.6);
+}
+
+/* 🟢 Low Density (2 ~ 19 stores): Emerald Green */
+.cluster-low .cluster-bubble {
+  background: radial-gradient(circle at 35% 35%, #34d399, #10b981, #047857);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* ==========================================================================
+   Custom Marker Popup Card
+   ========================================================================== */
+.leaflet-popup-content-wrapper {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.1) !important;
+  padding: 0 !important;
+  overflow: hidden;
+  color: #f8fafc !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.popup-card {
+  width: 290px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-card-header {
+  padding: 14px 16px 10px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.popup-tags-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.popup-category-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.popup-category-badge.mart { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.popup-category-badge.department { background: rgba(139, 92, 246, 0.2); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4); }
+.popup-category-badge.gym { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+.popup-category-badge.cvs { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+
+.popup-brand-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.popup-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.popup-branch {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.popup-card-body {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.popup-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #cbd5e1;
+}
+
+.popup-info-row svg {
+  width: 14px;
+  height: 14px;
+  color: #94a3b8;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.popup-card-footer {
+  padding: 10px 16px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.popup-link-btn {
+  flex: 1;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.popup-link-btn.kakao {
+  background: #fee500;
+  color: #191919;
+}
+
+.popup-link-btn.kakao:hover {
+  background: #ffd600;
+  transform: translateY(-1px);
+}
+
+.popup-link-btn.naver {
+  background: #03c75a;
+  color: #ffffff;
+}
+
+.popup-link-btn.naver:hover {
+  background: #02b350;
+  transform: translateY(-1px);
+}
